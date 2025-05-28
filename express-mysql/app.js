@@ -15,7 +15,7 @@ var methodOverride = require('method-override');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 // import posts route
-var postsRouter = require('./routes/posts'); // Ensure this matches your routes/posts.js
+var postsRouter = require('./routes/posts');
 
 
 var app = express();
@@ -32,19 +32,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // configure session and flash
 app.use(session({
-    secret: 'keyboard cat',
+    secret: 'keyboard cat', // Kunci rahasia untuk sesi
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    cookie: { maxAge: 60000 } // Masa berlaku cookie sesi (dalam milidetik)
 }));
 app.use(flash());
 
-// configure method-override
+// configure method-override (untuk mendukung PUT/DELETE dari form HTML)
 app.use(methodOverride('_method'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/posts', postsRouter); // use route posts
+app.use('/posts', postsRouter); // MENGGUNAKAN ROUTE POSTS
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
